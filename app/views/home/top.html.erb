@@ -1,0 +1,21 @@
+<div class="card-columns mt-3">
+  <% @dishes.each do |dish|%>
+    <div class="card">
+    <%= link_to dish.url, target: "_blank" do %>
+    <img class="card-img-top" src="<%= dish.image_url %>">
+    <% end %>
+    <div class="card-body">
+      <h5 class="card-title">
+        <%= dish.title %>
+      </h5>
+      <p class="card-text">
+        <%= dish.ingredients.truncate(20) %>
+      </p>
+      <div class="text-center">
+
+      <%= link_to "献立を作成", "/home/#{dish.id}", class: "btn btn-primary btn-create-menu" %>
+      </div>
+    </div>
+    </div>
+  <% end %>
+</div>

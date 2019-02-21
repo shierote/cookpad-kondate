@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  day: 1
+  dish_id: 1
+  b_v_id: 1
+  l_v_id: 1
+  l_fm_id: 1
+  d_v_id: 1
+  d_fm_id: 1
+
+two:
+  day: 1
+  dish_id: 1
+  b_v_id: 1
+  l_v_id: 1
+  l_fm_id: 1
+  d_v_id: 1
+  d_fm_id: 1

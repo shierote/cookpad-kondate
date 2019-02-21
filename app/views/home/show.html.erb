@@ -1,0 +1,181 @@
+<% @kondates.each do |kondate|  %>
+<div class="card text-center mb-3">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active"><%= kondate.day %>日目</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">使う具材</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">その他</a>
+      </li>
+    </ul>
+  </div>
+  <script>
+    $('.nav-link').click(function() {
+      $('.active').removeClass('active');
+      $(this).addClass('active');
+    })
+  </script>
+  <div class="card-body">
+    <div class="card-deck">
+        <div class="card border-success mb-3" style="">
+        <div class="card-header bg-transparent border-success text-success">朝食</div>
+        <div class="card-body">
+
+            <% b_v_dish = Dish.find(kondate.b_v_id) %>
+              <div class="card" style="">
+              <%= link_to b_v_dish.url, target: "_blank" do %>
+              <img class="card-img-top" src="<%= b_v_dish.image_url %>">
+              <% end %>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= b_v_dish.title %>
+                </h5>
+                <p class="card-text">
+                  <%= b_v_dish.ingredients.truncate(20) %>
+                </p>
+                <div class="text-center">
+
+                <%= link_to "/home/#{b_v_dish.id}", class: "btn btn-primary reload-btn" do %>
+                  <i class="fas fa-sync-alt"></i>
+                <% end %>
+                </div>
+              </div>
+            </div>
+
+        </div>
+        </div>
+
+        <div class="card border-danger mb-3" style="">
+        <div class="card-header bg-transparent border-danger text-danger">昼食</div>
+        <div class="card-body">
+          <div class="card-deck">
+
+            <% l_v_dish = Dish.find(kondate.l_v_id) %>
+              <div class="card" style="">
+              <%= link_to l_v_dish.url, target: "_blank" do %>
+              <img class="card-img-top" src="<%= l_v_dish.image_url %>">
+              <% end %>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= l_v_dish.title %>
+                </h5>
+                <p class="card-text">
+                  <%= l_v_dish.ingredients.truncate(20) %>
+                </p>
+                <div class="text-center">
+
+                <%= link_to "/home/#{l_v_dish.id}", class: "btn btn-primary reload-btn" do %>
+                  <i class="fas fa-sync-alt"></i>
+                <% end %>
+                </div>
+              </div>
+            </div>
+
+            <% l_fm_dish = Dish.find(kondate.l_fm_id) %>
+            <div class="card" style="">
+              <%= link_to l_fm_dish.url, target: "_blank" do %>
+              <img class="card-img-top" src="<%= l_fm_dish.image_url %>">
+              <% end %>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= l_fm_dish.title %>
+                </h5>
+                <p class="card-text">
+                  <%= l_fm_dish.ingredients.truncate(20) %>
+                </p>
+                <div class="text-center">
+
+                <%= link_to "/home/#{l_fm_dish.id}", class: "btn btn-primary reload-btn" do %>
+                  <i class="fas fa-sync-alt"></i>
+                <% end %>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        </div>
+
+        <div class="card border-info mb-3" style="">
+        <div class="card-header bg-transparent border-info text-info">夜食</div>
+        <div class="card-body">
+          <div class="card-deck">
+
+            <% d_v_dish = Dish.find(kondate.d_v_id) %>
+              <div class="card" style="">
+              <%= link_to d_v_dish.url, target: "_blank" do %>
+              <img class="card-img-top" src="<%= d_v_dish.image_url %>">
+              <% end %>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= d_v_dish.title %>
+                </h5>
+                <p class="card-text">
+                  <%= d_v_dish.ingredients.truncate(20) %>
+                </p>
+                <div class="text-center">
+                <%= link_to "/home/#{d_v_dish.id}", class: "btn btn-primary reload-btn" do %>
+                  <i class="fas fa-sync-alt"></i>
+                <% end %>
+                </div>
+              </div>
+            </div>
+
+            <% d_fm_dish = Dish.find(kondate.d_fm_id) %>
+           <div class="card" style="">
+              <%= link_to d_fm_dish.url, target: "_blank" do %>
+              <img class="card-img-top" src="<%= d_fm_dish.image_url %>">
+              <% end %>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= d_fm_dish.title %>
+                </h5>
+                <p class="card-text">
+                  <%= d_fm_dish.ingredients.truncate(20) %>
+                </p>
+                <div class="text-center">
+                <%= link_to "/home/#{d_fm_dish.id}", class: "btn btn-primary reload-btn" do %>
+                  <i class="fas fa-sync-alt"></i>
+                <% end %>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to "クックパッドマートで一括注文", "https://cookpad-mart.com/", class: "btn btn-primary mb-3 mt-5" %>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">食材名</th>
+      <th scope="col">回数</th>
+      <th scope="col">Cookpad martで注文</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ingredients.sort { |a, b| b[1] <=> a[1] }.each_with_index do |(key,val),i| %>
+      <% if val != 1%>
+
+    <tr>
+      <th scope="row"><%= i+1 %></th>
+      <td><%= key %></td>
+      <td><%= val %></td>
+      <td><%= link_to "クックパッドマートで注文", "https://cookpad-mart.com/", class: "btn btn-primary" %></td>
+    </tr>
+    
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

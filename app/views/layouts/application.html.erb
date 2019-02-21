@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cookpad kondate | あなたに最適な献立を</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  </head>
+  <body>
+    <header class="mb-3">
+      <div class="overlay">
+      </div>
+      <%= image_tag 'rawpixel-754045-unsplash.jpg', class: "w-100 header-img" %>
+      <div class="container h-100 position-absolute serach-container w-50">
+        <div class="d-flex h-100 text-center align-items-center">
+          <div class="w-100 text-white">
+            <h5 class="mb-3">食品ロスの少ない献立を提案します</h5>
+              <%= form_tag('/home/create', :method => :post) do %>
+              <%= text_field :meal, :name, class: "form-control mb-2 text-center", value: @initial_value, placeholder: "献立に入れたい料理/食材を検索" %>
+              <%= submit_tag "検索", class: "btn btn-primary" %>
+              <% end %>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+    <%= yield %>
+    </div>
+
+    <%= image_tag 'logo.png', class: "logo position-absolute" %>
+
+  </body>
+</html>
